@@ -1,5 +1,8 @@
 "use strict";
+// Variables
 let transactionsArray = [];
+let indexOfElementToBeEdited = -1;
+let dateOfElementToBeEdited = Date.now();
 // Start Page elements
 const startBtn = document.querySelector(".start");
 const startInput = document.getElementById("name");
@@ -30,7 +33,7 @@ const init = () => {
 };
 
 const createUser = (user) => {
-  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("user", JSON.stringify(formatTextToCapitalize(user)));
   checkUser();
   username.textContent = localStorage
     .getItem("user")
@@ -64,8 +67,57 @@ const checkRadioModal = () => {
   }
 };
 
+const findMode = function (expenseType) {
+  let icon = ``;
+  switch (expenseType) {
+    case "food":
+      icon = "hamburger";
+      break;
+    case "shopping":
+      icon = "shopping-cart";
+      break;
+    case "travel":
+      icon = "plane-departure";
+      break;
+    case "entertainment":
+      icon = "film";
+      break;
+    case "hospital":
+      icon = "hospital";
+      break;
+    case "other":
+      icon = "dollar-sign";
+      break;
+  }
+  return icon;
+};
+
+const findModeIndex = function (expenseType) {
+  let optionIndex = 0;
+  switch (expenseType) {
+    case "Food":
+      optionIndex = 0;
+      break;
+    case "Shopping":
+      optionIndex = 1;
+      break;
+    case "Travel":
+      optionIndex = 2;
+      break;
+    case "Entertainment":
+      optionIndex = 3;
+      break;
+    case "Medical":
+      optionIndex = 4;
+      break;
+    case "Other":
+      optionIndex = 5;
+      break;
+  }
+  return optionIndex;
+};
+
 const calcDaysPassed = function (day1, day2) {
-  // return Math.round(Math.abs(day1 - day2) / (1000 * 60 * 60 * 24));
   return Math.abs(new Date(day1).getDate() - new Date(day2).getDate());
 };
 
@@ -81,6 +133,15 @@ const formatDate = (date) => {
   else if (daysPassed === 1) return `Yesterday, ${hour}:${min}`;
   else if (daysPassed <= 7) return `${daysPassed} days ago`;
   else return `${day}/${month}/${year}, ${hour}:${min}`;
+};
+
+const formatTextToCapitalize = function (words) {
+  var separateWord = words.toLowerCase().split(" ");
+  for (var i = 0; i < separateWord.length; i++) {
+    separateWord[i] =
+      separateWord[i].charAt(0).toUpperCase() + separateWord[i].substring(1);
+  }
+  return separateWord.join(" ");
 };
 
 const formatBalancesInRupeesFormat = function (balance) {
@@ -119,7 +180,6 @@ const calculateBalance = function (array) {
 const loadMainMenu = function () {
   let html = "";
   transactionsArray = JSON.parse(localStorage.getItem("transactions"));
-  console.log(transactionsArray);
   username.textContent = localStorage
     .getItem("user")
     .slice(1, localStorage.getItem("user").length - 1);
@@ -152,31 +212,10 @@ const loadMainMenu = function () {
           </div>
     `;
     } else if (d.type === "expense") {
-      let icon = ``;
-      switch (d.mode) {
-        case "food":
-          icon = "hamburger";
-          break;
-        case "shopping":
-          icon = "shopping-cart";
-          break;
-        case "travel":
-          icon = "plane-departure";
-          break;
-        case "entertainment":
-          icon = "film";
-          break;
-        case "medical":
-          icon = "hospital";
-          break;
-        case "other":
-          icon = "dollar-sign";
-          break;
-      }
       html = `
         <div class="transaction ${d.mode}">
           <div class="left">
-            <i class="fas fa-${icon} main-icon"></i>
+            <i class="fas fa-${findMode(d.mode)} main-icon"></i>
             <i class="fas fa-minus-circle none" id="minus-icon" onclick="removeTransaction();"></i>
             <i class="fas fa-pencil-alt none" id="edit-icon" onclick=editTransaction();></i>
             <div>
@@ -200,113 +239,6 @@ const loadMainMenu = function () {
   });
   calculateBalance(transactionsArray);
 };
-
-// Event listeners
-startBtn.addEventListener("click", () => {
-  if (!startInput.value) return;
-  createUser(startInput.value);
-});
-
-openModalBtn.addEventListener("click", () => {
-  modal.classList.remove("none");
-  document.querySelector(".edit-h1").classList.add("none");
-  document.querySelector(".add-h1").classList.remove("none");
-  document.querySelector(".add-btn").classList.remove("none");
-  document.querySelector(".save-btn").classList.add("none");
-});
-closeModalBtn.addEventListener("click", () => {
-  modal.classList.add("none");
-});
-
-addBtn.addEventListener("click", () => {
-  let income = false;
-  const detailsObject = {
-    type: "",
-    amount: 0,
-    note: "",
-    date: Date.now(),
-  };
-  if (document.getElementById("income").checked) {
-    income = true;
-  }
-  if (document.getElementById("expense").checked) {
-    income = false;
-  }
-  const expenseType = document.getElementById("expense-type").value;
-  const amount = document.getElementById("amount").value;
-  const note = document.getElementById("note").value;
-  document.getElementById("amount").value = "";
-  document.getElementById("note").value = "";
-  if (!amount) {
-    document.getElementById("amount").style.borderBottom = "3px solid red";
-    document.getElementById("amount").placeholder = "Amount?!?";
-    return;
-  }
-  if (!note) {
-    document.getElementById("note").style.borderBottom = "3px solid red";
-    document.getElementById("note").placeholder = "Don't forget to add note!";
-    return;
-  }
-  if (income) {
-    detailsObject.type = "income";
-  }
-  if (!income) {
-    let icon = ``;
-    switch (expenseType) {
-      case "food":
-        icon = "hamburger";
-        break;
-      case "shopping":
-        icon = "shopping-cart";
-        break;
-      case "travel":
-        icon = "plane-departure";
-        break;
-      case "entertainment":
-        icon = "film";
-        break;
-      case "hospital":
-        icon = "hospital";
-        break;
-      case "other":
-        icon = "dollar-sign";
-        break;
-    }
-    detailsObject.type = "expense";
-    detailsObject.mode = expenseType;
-  }
-
-  modal.classList.add("none");
-  document.getElementById("amount").style.borderBottom = "3px solid purple";
-  document.getElementById("amount").placeholder = "Add amount";
-  document.getElementById("note").style.borderBottom = "3px solid purple";
-  document.getElementById("note").placeholder = "Add Note";
-  detailsObject.amount = amount;
-  detailsObject.note = note.charAt(0).toUpperCase() + note.slice(1);
-
-  transactionsArray.push(detailsObject);
-  localStorage.setItem("transactions", JSON.stringify(transactionsArray));
-  calculateBalance(transactionsArray);
-  loadMainMenu();
-});
-
-delBtn.addEventListener("click", () => {
-  // Hiding buttons
-  openModalBtn.classList.add("none");
-  searchBtn.classList.add("none");
-  editBtn.classList.add("none");
-  sortBtn.classList.add("none");
-  delBtn.classList.add("none");
-  // Displaying tick button
-  tickBtn.classList.remove("none");
-  // Displaying minus buttons against each transaction
-  document
-    .querySelectorAll(".main-icon")
-    .forEach((icon) => icon.classList.add("none"));
-  document
-    .querySelectorAll("#minus-icon")
-    .forEach((icon) => icon.classList.remove("none"));
-});
 
 const removeTransaction = function () {
   document.querySelectorAll(".left").forEach((btn) =>
@@ -362,6 +294,17 @@ const removeTransaction = function () {
   );
 };
 
+const displayTick = function () {
+  // Hiding buttons
+  openModalBtn.classList.add("none");
+  searchBtn.classList.add("none");
+  editBtn.classList.add("none");
+  sortBtn.classList.add("none");
+  delBtn.classList.add("none");
+  // Displaying tick button
+  tickBtn.classList.remove("none");
+};
+
 const tickBtnFunctionality = function () {
   openModalBtn.classList.remove("none");
   searchBtn.classList.remove("none");
@@ -381,31 +324,6 @@ const tickBtnFunctionality = function () {
     .forEach((icon) => icon.classList.add("none"));
 };
 
-tickBtn.addEventListener("click", () => {
-  tickBtnFunctionality();
-  loadMainMenu();
-});
-
-editBtn.addEventListener("click", () => {
-  // Hiding buttons
-  openModalBtn.classList.add("none");
-  searchBtn.classList.add("none");
-  editBtn.classList.add("none");
-  sortBtn.classList.add("none");
-  delBtn.classList.add("none");
-  // Displaying tick button
-  tickBtn.classList.remove("none");
-  // Displaying edit-icon buttons against each transaction
-  document
-    .querySelectorAll(".main-icon")
-    .forEach((icon) => icon.classList.add("none"));
-  document
-    .querySelectorAll("#edit-icon")
-    .forEach((icon) => icon.classList.remove("none"));
-});
-
-let indexOfElementToBeEdited = -1;
-let dateOfElementToBeEdited = Date.now();
 const editTransaction = function () {
   document.querySelectorAll(".left").forEach((btn) =>
     btn.addEventListener("click", (e) => {
@@ -437,7 +355,7 @@ const editTransaction = function () {
         }
         // Find the current transaction index
         array = JSON.parse(localStorage.getItem("transactions"));
-        console.log(array);
+
         let data = "";
 
         let count = 0;
@@ -471,33 +389,111 @@ const editTransaction = function () {
             transactionToBeEdited.childNodes[0].nextElementSibling.outerText.split(
               "\n"
             )[0];
-          let optionIndex = 0;
-          switch (expenseType) {
-            case "Food":
-              optionIndex = 0;
-              break;
-            case "Shopping":
-              optionIndex = 1;
-              break;
-            case "Travel":
-              optionIndex = 2;
-              break;
-            case "Entertainment":
-              optionIndex = 3;
-              break;
-            case "Medical":
-              optionIndex = 4;
-              break;
-            case "Other":
-              optionIndex = 5;
-              break;
-          }
-          document.getElementById("expense-type").selectedIndex = optionIndex;
+
+          document.getElementById("expense-type").selectedIndex =
+            findModeIndex(expenseType);
         }
       }
     })
   );
 };
+
+// Event listeners
+startBtn.addEventListener("click", () => {
+  if (!startInput.value) return;
+  createUser(startInput.value);
+});
+
+openModalBtn.addEventListener("click", () => {
+  modal.classList.remove("none");
+  document.querySelector(".edit-h1").classList.add("none");
+  document.querySelector(".add-h1").classList.remove("none");
+  document.querySelector(".add-btn").classList.remove("none");
+  document.querySelector(".save-btn").classList.add("none");
+});
+
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.add("none");
+});
+
+addBtn.addEventListener("click", () => {
+  let income = false;
+  const detailsObject = {
+    type: "",
+    amount: 0,
+    note: "",
+    date: Date.now(),
+  };
+  if (document.getElementById("income").checked) {
+    income = true;
+  }
+  if (document.getElementById("expense").checked) {
+    income = false;
+  }
+  const expenseType = document.getElementById("expense-type").value;
+  const amount = document.getElementById("amount").value;
+  const note = document.getElementById("note").value;
+  document.getElementById("amount").value = "";
+  document.getElementById("note").value = "";
+  if (!amount) {
+    document.getElementById("amount").style.borderBottom = "3px solid red";
+    document.getElementById("amount").placeholder = "Amount?!?";
+    return;
+  }
+  if (!note) {
+    document.getElementById("note").style.borderBottom = "3px solid red";
+    document.getElementById("note").placeholder = "Don't forget to add note!";
+    return;
+  }
+  if (income) {
+    detailsObject.type = "income";
+  }
+  if (!income) {
+    detailsObject.type = "expense";
+    detailsObject.mode = expenseType;
+  }
+
+  modal.classList.add("none");
+  document.getElementById("amount").style.borderBottom = "3px solid purple";
+  document.getElementById("amount").placeholder = "Add amount";
+  document.getElementById("note").style.borderBottom = "3px solid purple";
+  document.getElementById("note").placeholder = "Add Note";
+  detailsObject.amount = amount;
+  detailsObject.note = note.charAt(0).toUpperCase() + note.slice(1);
+
+  transactionsArray.push(detailsObject);
+  localStorage.setItem("transactions", JSON.stringify(transactionsArray));
+  calculateBalance(transactionsArray);
+  loadMainMenu();
+});
+
+delBtn.addEventListener("click", () => {
+  displayTick();
+  // Displaying minus buttons against each transaction
+  document
+    .querySelectorAll(".main-icon")
+    .forEach((icon) => icon.classList.add("none"));
+  document
+    .querySelectorAll("#minus-icon")
+    .forEach((icon) => icon.classList.remove("none"));
+});
+
+tickBtn.addEventListener("click", () => {
+  tickBtnFunctionality();
+  loadMainMenu();
+});
+
+editBtn.addEventListener("click", () => {
+  displayTick();
+  // Displaying edit-icon buttons against each transaction
+  document
+    .querySelectorAll(".main-icon")
+    .forEach((icon) => icon.classList.add("none"));
+  document
+    .querySelectorAll("#edit-icon")
+    .forEach((icon) => icon.classList.remove("none"));
+});
+
 saveBtn.addEventListener("click", function () {
   let income = false;
   const detailsObject = {
@@ -529,27 +525,6 @@ saveBtn.addEventListener("click", function () {
     detailsObject.type = "income";
   }
   if (!income) {
-    let icon = ``;
-    switch (expenseType) {
-      case "food":
-        icon = "hamburger";
-        break;
-      case "shopping":
-        icon = "shopping-cart";
-        break;
-      case "travel":
-        icon = "plane-departure";
-        break;
-      case "entertainment":
-        icon = "film";
-        break;
-      case "hospital":
-        icon = "hospital";
-        break;
-      case "other":
-        icon = "dollar-sign";
-        break;
-    }
     detailsObject.type = "expense";
     detailsObject.mode = expenseType;
   }
@@ -560,11 +535,10 @@ saveBtn.addEventListener("click", function () {
   document.getElementById("note").placeholder = "Add Note";
   detailsObject.amount = amount;
   detailsObject.note = note.charAt(0).toUpperCase() + note.slice(1);
-  console.log("hello");
+
   let array = [];
   // Fetching local storage data
   array = JSON.parse(localStorage.getItem("transactions"));
-  console.log(array);
 
   // Update Array
   array.splice(indexOfElementToBeEdited, 1, detailsObject);
@@ -576,6 +550,7 @@ saveBtn.addEventListener("click", function () {
   tickBtnFunctionality();
   loadMainMenu();
 });
+
 searchBtn.addEventListener("click", () => {});
 sortBtn.addEventListener("click", () => {});
 profileBtn.addEventListener("click", () => {});
