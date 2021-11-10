@@ -1,0 +1,45 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  border-radius: 0px;
+}
+
+.initial-text:first-child {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.wrapper #name {
+  width: 60%;
+  height: 2rem;
+  font-size: medium;
+}
+.wrapper .start {
+  width: 14rem;
+  height: 7rem;
+  padding-left: 40px;
+  padding-bottom: 28px;
+}
+.wrapper-main {
+  overflow-y: scroll;
+  display: block;
+}
+.profile {
+  padding-top: 1rem;
+}
+.modal-content {
+  margin: 0 auto;
+}
+.modal-bottom {
+  font-size: medium;
+}
+#amount,
+textarea {
+  font-size: small;
+}
+table td {
+  padding: 0.5rem;
+  padding-bottom: 0;
+}
+.button {
+  padding-bottom: 0.5rem;
+}

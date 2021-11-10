@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker | Track your money</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" media="(max-width:500px)" href="mobile.css" />
+    <link
+      rel="stylesheet"
+      media="(max-width:768px) and (min-width:501px)"
+      href="tablet.css"
+    />
+    <link rel="stylesheet" media="(min-width:1025px)" href="widescreen.css" />
+    <link rel="stylesheet" media="(max-height:500px)" href="landscape.css" />
+    <link rel="stylesheet" media="(max-height:750px)" href="extra.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/jpg" href="./expenses.png" />
+  </head>
+  <body>
+    <!-- Start Screen -->
+    <div class="container container-1">
+      <div class="wrapper">
+        <div class="initial-text">
+          <h1 class="line">It's your</h1>
+          <h1 class="line"><span class="text-primary">Money</span></h1>
+          <h1 class="line">Own it.</h1>
+        </div>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Your Name"
+          autofocus
+        />
+        <button type="submit" class="start">Start<span>></span></button>
+      </div>
+    </div>
+    <!-- Main Screen -->
+    <div class="container container-2 none">
+      <div class="wrapper wrapper-main">
+        <div class="profile">
+          <i class="fas fa-user-ninja item"></i>
+          <div class="wrap-text">
+            <p class="item">Welcome!</p>
+            <h1 class="item username">Jolly</h1>
+          </div>
+        </div>
+        <button class="tick none"><i class="fas fa-check"></i></button>
+        <button class="add"><i class="fas fa-plus"></i></button>
+        <button class="delete"><i class="fas fa-trash"></i></button>
+        <button class="search"><i class="fas fa-search"></i></button>
+        <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+        <button class="sort"><i class="fas fa-sort"></i></button>
+
+        <div class="details">
+          <div class="total">
+            <p>Total Balance</p>
+            <strong class="totalBalance">₹ 0</strong>
+          </div>
+          <div class="detail">
+            <div class="income">
+              <p>Income</p>
+              <strong class="incomeBalance">₹ 0</strong>
+            </div>
+            <div class="expense">
+              <p>Expense</p>
+              <strong class="expenseBalance">₹ 0</strong>
+            </div>
+          </div>
+        </div>
+        <div class="transactions">
+          <p class="tr">Transactions</p>
+          <div class="transaction-list"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal none">
+      <div class="modal-content">
+        <div class="close-modal">&times;</div>
+        <div class="contents">
+          <h1 class="add-h1">Add Transaction</h1>
+          <h1 class="none edit-h1">Edit Transaction</h1>
+          <table class="modal-bottom">
+            <tr>
+              <td>
+                <label for="income">Income</label>
+                <input
+                  type="radio"
+                  onclick="checkRadioModal();"
+                  id="income"
+                  name="mode"
+                />
+              </td>
+              <td>
+                <label for="expense">Expense</label>
+                <input
+                  type="radio"
+                  onclick="checkRadioModal();"
+                  id="expense"
+                  name="mode"
+                  checked="true"
+                />
+              </td>
+            </tr>
+            <tr class="expense-mode">
+              <td class="type">
+                <label for="type">Expense Type</label>
+              </td>
+              <td class="type">
+                <select name="type" id="expense-type">
+                  <option value="food">Food</option>
+                  <option value="shopping">Shopping</option>
+                  <option value="travel">Travel</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="medical">Medical</option>
+                  <option value="other">Miscellaneous</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="amount">Amount</label>
+              </td>
+              <td>
+                <input type="number" id="amount" placeholder="Add amount" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="note">Note</label>
+              </td>
+              <td>
+                <textarea
+                  name="note"
+                  id="note"
+                  placeholder="Add Note"
+                ></textarea>
+              </td>
+            </tr>
+          </table>
+          <div class="button">
+            <button class="btn add-btn" type="submit">Add</button>
+            <button class="btn save-btn none" type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Font-Awesome -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/107826f452.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Main Script -->
+    <script defer src="script.js"></script>
+  </body>
+</html>

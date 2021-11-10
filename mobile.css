@@ -1,0 +1,39 @@
+@media (max-width: 300px) {
+  .mode .green,
+  .mode.red {
+    margin: 0 !important;
+    text-align: left !important;
+    flex: 1 !important;
+  }
+}
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  border-radius: 0px;
+}
+.details {
+  width: 95%;
+}
+.total strong,
+.income strong,
+.expense strong {
+  font-size: 1.3rem;
+}
+.tr {
+  padding: 0 2rem;
+}
+.modal-content {
+  width: 100%;
+  margin: 0;
+  height: 100%;
+}
+.contents h1 {
+  margin: 0;
+  padding: 3rem 0;
+}
+table td {
+  padding: 1.25rem 0;
+}
+.transactions {
+  margin: 0;
+}

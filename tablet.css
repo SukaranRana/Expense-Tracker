@@ -1,0 +1,14 @@
+.wrapper {
+  height: 90%;
+  width: 80%;
+  border-radius: 0px;
+}
+.wrapper .start {
+  width: 15rem;
+  height: 8rem;
+  padding-left: 44px;
+  padding-bottom: 26px;
+}
+.modal-content {
+  width: 80%;
+}

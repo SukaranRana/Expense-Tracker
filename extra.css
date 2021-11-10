@@ -1,0 +1,13 @@
+.wrapper .start {
+  width: 14rem;
+  height: 6rem;
+  padding-left: 35px;
+  padding-bottom: 28px;
+}
+.initial-text:first-child {
+  margin-top: 4rem;
+  margin-bottom: 13rem;
+}
+.modal-content {
+  margin: 0 auto;
+}
