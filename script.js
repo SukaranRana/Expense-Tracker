@@ -82,7 +82,7 @@ const findMode = function (expenseType) {
     case "entertainment":
       icon = "film";
       break;
-    case "hospital":
+    case "medical":
       icon = "hospital";
       break;
     case "other":
