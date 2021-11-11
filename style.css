@@ -428,6 +428,9 @@ select {
   font-size: large;
   color:#fff;
   background:#000;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgb(128, 0, 128);
 }
 #amount,
 textarea {
