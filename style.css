@@ -165,11 +165,7 @@
   background-color: #fbb034;
   background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
 }
-.details .chart {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+
 .details p {
   color: #000;
 }
@@ -247,16 +243,61 @@
   margin-right: 2px;
 }
 .food .left i {
-  background-color: #bd4f6c;
-  background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
+  background: #f953c6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b91d73,
+    #f953c6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b91d73,
+    #f953c6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.recharge .left i {
+  padding: 10px 13px;
+  background: #00b4db; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #0083b0,
+    #00b4db
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0083b0,
+    #00b4db
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.insurance .left i {
+  background: #ad5389; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #3c1053,
+    #ad5389
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #3c1053,
+    #ad5389
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .salary .left i {
   background-color: #00b712;
   background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
 }
 .shopping .left i {
-  background-color: #63a4ff;
-  background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+  background: #414d0b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #727a17,
+    #414d0b
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #727a17,
+    #414d0b
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .travel .left i {
   background: #c21500; /* fallback for old browsers */
@@ -273,21 +314,51 @@
   padding: 10px 9px;
 }
 .entertainment .left i {
-  background: #de6262; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #ffb88c,
-    #de6262
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #ffb88c,
-    #de6262
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: radial-gradient(
+    circle 860px at 11.8% 33.5%,
+    rgba(240, 30, 92, 1) 0%,
+    rgba(244, 49, 74, 1) 30.5%,
+    rgba(249, 75, 37, 1) 56.1%,
+    rgba(250, 88, 19, 1) 75.6%,
+    rgba(253, 102, 2, 1) 100.2%
+  );
 }
 .medical .left i {
-  background-color: #b8c6db;
-  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 209, 67, 1) 0%,
+    rgba(255, 145, 83, 1) 90%
+  );
+}
+.electricity .left i {
+  background: #833ab4; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #fcb045,
+    #fd1d1d,
+    #833ab4
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #fcb045,
+    #fd1d1d,
+    #833ab4
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  padding: 10px 12px;
+}
+.water .left i {
+  background: #00b4db; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #0083b0,
+    #00b4db
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #0083b0,
+    #00b4db
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .other .left i {
   background-color: #1fd1f9;
