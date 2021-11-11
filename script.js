@@ -76,6 +76,12 @@ const findMode = function (expenseType) {
     case "shopping":
       icon = "shopping-cart";
       break;
+    case "recharge":
+      icon = "mobile";
+      break;
+    case "insurance":
+      icon = "heartbeat";
+      break;
     case "travel":
       icon = "plane-departure";
       break;
@@ -83,7 +89,13 @@ const findMode = function (expenseType) {
       icon = "film";
       break;
     case "medical":
-      icon = "hospital";
+      icon = "hospital-alt";
+      break;
+    case "electricity":
+      icon = "lightbulb";
+      break;
+    case "water":
+      icon = "faucet";
       break;
     case "other":
       icon = "dollar-sign";
@@ -98,20 +110,35 @@ const findModeIndex = function (expenseType) {
     case "Food":
       optionIndex = 0;
       break;
-    case "Shopping":
+    case "Recharge":
       optionIndex = 1;
       break;
-    case "Travel":
+    case "Insurance":
       optionIndex = 2;
       break;
-    case "Entertainment":
+    case "Shopping":
       optionIndex = 3;
       break;
-    case "Medical":
+    case "Travel":
       optionIndex = 4;
       break;
-    case "Other":
+    case "Entertainment":
       optionIndex = 5;
+      break;
+    case "Medical":
+      optionIndex = 6;
+      break;
+    case "Electricity":
+      optionIndex = 7;
+      break;
+    case "Water":
+      optionIndex = 8;
+      break;
+    case "Other":
+      optionIndex = 9;
+      break;
+    default:
+      optionIndex = 9;
       break;
   }
   return optionIndex;
@@ -271,8 +298,9 @@ const removeTransaction = function () {
         array = JSON.parse(localStorage.getItem("transactions"));
         let index = -1;
         let data = "";
-
+        console.log(type, note, amount);
         let count = 0;
+        console.log(array);
         array.forEach((i) => {
           if (i.amount === amount && i.note === note && i.type === type) {
             index = count;
@@ -281,14 +309,12 @@ const removeTransaction = function () {
         });
         count = 0;
         array.splice(index, 1);
+
         localStorage.removeItem("transactions");
         localStorage.setItem("transactions", JSON.stringify(array));
-        if (array.length > 3) {
-          transactionToBeDeleted.outerHTML = "";
-        } else {
-          tickBtnFunctionality();
-          loadMainMenu();
-        }
+        transactionToBeDeleted.remove();
+        loadMainMenu();
+        deleteBtnFunctionality();
       }
     })
   );
@@ -322,6 +348,17 @@ const tickBtnFunctionality = function () {
   document
     .querySelectorAll("#edit-icon")
     .forEach((icon) => icon.classList.add("none"));
+};
+
+const deleteBtnFunctionality = function () {
+  displayTick();
+  // Displaying minus buttons against each transaction
+  document
+    .querySelectorAll(".main-icon")
+    .forEach((icon) => icon.classList.add("none"));
+  document
+    .querySelectorAll("#minus-icon")
+    .forEach((icon) => icon.classList.remove("none"));
 };
 
 const editTransaction = function () {
@@ -468,14 +505,7 @@ addBtn.addEventListener("click", () => {
 });
 
 delBtn.addEventListener("click", () => {
-  displayTick();
-  // Displaying minus buttons against each transaction
-  document
-    .querySelectorAll(".main-icon")
-    .forEach((icon) => icon.classList.add("none"));
-  document
-    .querySelectorAll("#minus-icon")
-    .forEach((icon) => icon.classList.remove("none"));
+  deleteBtnFunctionality();
 });
 
 tickBtn.addEventListener("click", () => {
