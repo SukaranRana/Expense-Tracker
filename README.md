@@ -1,2 +1,2 @@
 # Expense-Tracker
-https://expense-tracker-own-your-money.netlify.app
+https://expense-tracker-know-your-expenses.netlify.app/
