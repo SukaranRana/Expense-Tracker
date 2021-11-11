@@ -42,6 +42,7 @@ const createUser = (user) => {
     incomeBalance.textContent =
     expenseBalance.textContent =
       0;
+  localStorage.setItem("transactions", JSON.stringify(transactionsArray));
 };
 
 const checkUser = () => {
