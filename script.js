@@ -200,6 +200,11 @@ const calculateBalance = function (array) {
   // Total Balance
   const total = incomes - expenses;
   // Updating DOM
+  if (total > 0) {
+    document.querySelector(".savingsMsg").classList.add("none");
+  } else {
+    document.querySelector(".savingsMsg").classList.remove("none");
+  }
   totalBalance.textContent = formatBalancesInRupeesFormat(total);
   incomeBalance.textContent = formatBalancesInRupeesFormat(incomes);
   expenseBalance.textContent = formatBalancesInRupeesFormat(expenses);
