@@ -12,6 +12,7 @@
 .modal-content {
   width: 30%;
 }
-.delete-modal-content {
+.delete-modal-content,
+.edit-modal-content {
   width: 20%;
 }
