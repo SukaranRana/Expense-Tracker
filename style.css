@@ -148,6 +148,30 @@
   border-radius: 50%;
   align-self: center;
 }
+#user-minus-icon {
+  font-size: medium;
+  cursor: pointer;
+  padding: 11px 8.5px;
+  color: #fff;
+  background: #ed213a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #93291e,
+    #ed213a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #93291e,
+    #ed213a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#user-edit-icon {
+  cursor: pointer;
+  font-size: medium;
+  padding: 11.5px 8.5px;
+  background-color: #f5d020;
+  background-image: linear-gradient(315deg, #f5d020 0%, #f53803 74%);
+}
 .profile p {
   font-size: smaller;
 }
@@ -182,7 +206,7 @@
 .income strong,
 .expense strong {
   font-size: 1.5rem;
-  color: #649ff0;
+  color: #4169e1;
 }
 .detail {
   display: flex;
@@ -223,7 +247,12 @@
   position: relative;
   /* border: 1px solid red; */
 }
-
+.zero-transaction {
+  font-size: smaller;
+  margin-top: 3rem;
+  color: #fbb034;
+  text-align: center;
+}
 .transaction-list {
   overflow: auto;
 }
@@ -367,8 +396,17 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .other .left i {
-  background-color: #1fd1f9;
-  background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+  background: #cc2b5e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #753a88,
+    #cc2b5e
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #753a88,
+    #cc2b5e
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   padding: 10px 13px;
 }
 .transaction .left p:first-child {
@@ -471,4 +509,43 @@ textarea {
 }
 .button {
   padding-bottom: 1rem;
+}
+/* delete modal */
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(2px);
+}
+.delete-modal-content {
+  position: relative;
+  margin: 18vh auto;
+  padding: 2rem 1rem;
+  width: 40%;
+  border-radius: 5px;
+  border: 1px solid rgb(128, 0, 128);
+  color: rgb(128, 0, 128);
+  background-color: #000;
+  text-align: center;
+  font-size: larger;
+}
+.delete-yes,
+.delete-no {
+  margin-top: 2rem;
+  background-color: inherit;
+  border: 1px solid rgb(128, 0, 128);
+  color: #fff;
+  border-radius: 20%;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-emphasis: bolder;
+  transition: all 1s ease-out;
+}
+.delete-yes:hover,
+.delete-no:hover {
+  color: rgb(128, 0, 128);
+  background-color: #fff;
 }
