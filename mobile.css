@@ -37,6 +37,7 @@ table td {
 .transactions {
   margin: 0;
 }
-.delete-modal-content {
+.delete-modal-content,
+.edit-modal-content {
   width: 80%;
 }
