@@ -1,12 +1,18 @@
 "use strict";
+
 // Variables
 let transactionsArray = [];
 let indexOfElementToBeEdited = -1;
 let dateOfElementToBeEdited = Date.now();
+
+// Splash Screen
+const splash = document.querySelector(".splash");
+
 // Start Page elements
 const startBtn = document.querySelector(".start");
 const startInput = document.getElementById("name");
 const startMenu = document.querySelector(".container-1");
+
 //Main menu elements
 const mainMenu = document.querySelector(".container-2");
 const username = document.querySelector(".username");
@@ -15,24 +21,28 @@ const incomeBalance = document.querySelector(".incomeBalance");
 const expenseBalance = document.querySelector(".expenseBalance");
 const openModalBtn = document.querySelector(".add");
 const delBtn = document.querySelector(".delete");
-const searchBtn = document.querySelector(".search");
 const editBtn = document.querySelector(".edit");
 const saveBtn = document.querySelector(".save-btn");
-const sortBtn = document.querySelector(".sort");
 const tickBtn = document.querySelector(".tick");
 const profileBtn = document.querySelector(".fa-user-ninja");
 const editProfile = document.querySelector("#user-edit-icon");
 const deleteProfile = document.querySelector("#user-minus-icon");
+// const searchBtn = document.querySelector(".search");
+// const sortBtn = document.querySelector(".sort");
+
 //Add-Edit Modal elements
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".close-modal");
 const addBtn = document.querySelector(".btn");
+
 // Delete-Edit Profile elements
 const delYes = document.querySelector(".delete-yes");
 const delNo = document.querySelector(".delete-no");
 const editYes = document.querySelector(".edit-yes");
 const editNo = document.querySelector(".edit-no");
+
 // Functions
+
 const init = () => {
   checkUser();
   loadMainMenu();
@@ -607,9 +617,10 @@ saveBtn.addEventListener("click", function () {
   loadMainMenu();
 });
 
-searchBtn.addEventListener("click", () => {});
-sortBtn.addEventListener("click", () => {});
+// searchBtn.addEventListener("click", () => {});
+// sortBtn.addEventListener("click", () => {});
 
+// Delete Profile
 document.getElementById("user-minus-icon").addEventListener("click", () => {
   document.querySelector(".delete-modal").classList.remove("none");
 });
@@ -623,6 +634,7 @@ delNo.addEventListener("click", () => {
   tickBtnFunctionality();
 });
 
+// Edit Profile
 document.getElementById("user-edit-icon").addEventListener("click", () => {
   document.querySelector(".edit-modal").classList.remove("none");
   document.querySelector(".edit-input").focus();
@@ -634,7 +646,9 @@ editYes.addEventListener("click", () => {
   document.querySelector(".edit-modal").classList.add("none");
   localStorage.setItem(
     "user",
-    JSON.stringify(document.querySelector(".edit-input").value)
+    JSON.stringify(
+      formatTextToCapitalize(document.querySelector(".edit-input").value)
+    )
   );
   tickBtnFunctionality();
   loadMainMenu();
@@ -642,6 +656,13 @@ editYes.addEventListener("click", () => {
 editNo.addEventListener("click", () => {
   document.querySelector(".edit-modal").classList.add("none");
   tickBtnFunctionality();
+});
+
+// Splash Screen
+document.addEventListener("DOMContentLoaded", (e) => {
+  setTimeout(() => {
+    splash.classList.add("display-none");
+  }, 1500);
 });
 
 // Initialisation
