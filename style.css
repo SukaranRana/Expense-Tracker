@@ -510,16 +510,19 @@ textarea {
 .button {
   padding-bottom: 1rem;
 }
-/* delete modal */
-.delete-modal {
+/* delete-edit profile modal */
+.delete-modal,
+.edit-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
   backdrop-filter: blur(2px);
 }
-.delete-modal-content {
+.delete-modal-content,
+.edit-modal-content {
   position: relative;
   margin: 18vh auto;
   padding: 2rem 1rem;
@@ -532,20 +535,36 @@ textarea {
   font-size: larger;
 }
 .delete-yes,
-.delete-no {
+.delete-no,
+.edit-yes,
+.edit-no {
   margin-top: 2rem;
   background-color: inherit;
   border: 1px solid rgb(128, 0, 128);
   color: #fff;
-  border-radius: 20%;
+  border-radius: 45%;
   padding: 0.5rem 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
   text-emphasis: bolder;
   transition: all 1s ease-out;
+  cursor: pointer;
 }
 .delete-yes:hover,
-.delete-no:hover {
+.delete-no:hover,
+.edit-yes:hover,
+.edit-no:hover {
   color: rgb(128, 0, 128);
   background-color: #fff;
+}
+.edit-input {
+  border: none;
+  border-bottom: 2px solid rgb(128, 0, 128);
+  outline: none;
+  margin: 1rem;
+  margin-bottom: 0;
+  padding: 0.25rem 0.5rem;
+  background-color: inherit;
+  color: #fff;
+  text-align: center;
 }
