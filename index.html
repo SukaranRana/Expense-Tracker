@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Time to forget about receipts and manual tracking, shift to Expense Tracker and track your money. Just one tap and transaction is added. With simple UI, it is accessible by each age group."
+    />
+    <meta
+      name="keywords"
+      content="expense, tracker, income, savings, money, transactions"
+    />
     <title>Expense Tracker | Track your money</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,6 +58,8 @@
       <div class="wrapper wrapper-main">
         <div class="profile">
           <i class="fas fa-user-ninja item"></i>
+          <i class="fas fa-user-minus none" id="user-minus-icon" onclick=""></i>
+          <i class="fas fa-user-edit none" id="user-edit-icon" onclick=""></i>
           <div class="wrap-text">
             <p class="item">Welcome!</p>
             <h1 class="item username">Jolly</h1>
@@ -97,7 +107,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!--Add/Edit Modal -->
     <div class="modal none">
       <div class="modal-content">
         <div class="close-modal">&times;</div>
@@ -171,6 +181,14 @@
             <button class="btn save-btn none" type="submit">Save</button>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- Delete Modal -->
+    <div class="delete-modal none">
+      <div class="delete-modal-content">
+        <p class="delete-question">Do you want to delete your profile?</p>
+        <button class="delete-yes" type="submit">Yes</button>
+        <button class="delete-no" type="submit">No</button>
       </div>
     </div>
     <!-- Font-Awesome -->
