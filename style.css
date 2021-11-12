@@ -568,3 +568,56 @@ textarea {
   color: #fff;
   text-align: center;
 }
+/* Splash screen */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+}
+.display-none {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  transition: all 1.5s ease-in;
+}
+
+svg {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  transform: scale(0.5);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes breathInOut {
+  0% {
+    animation-timing-function: cubic-bezier(0.9647, 0.2413, -0.0705, 0.7911);
+    transform: scale(0.9099999999999999);
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.9226, 0.2631, -0.0308, 0.7628);
+    transform: scale(1.02994);
+  }
+  100% {
+    transform: scale(0.9099999999999999);
+  }
+}
