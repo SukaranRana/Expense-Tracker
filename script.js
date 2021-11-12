@@ -349,9 +349,9 @@ const removeTransaction = function () {
 const displayTick = function () {
   // Hiding buttons
   openModalBtn.classList.add("none");
-  searchBtn.classList.add("none");
+  // searchBtn.classList.add("none");
   editBtn.classList.add("none");
-  sortBtn.classList.add("none");
+  // sortBtn.classList.add("none");
   delBtn.classList.add("none");
   // Hiding profile button
   profileBtn.classList.add("none");
@@ -361,9 +361,9 @@ const displayTick = function () {
 
 const tickBtnFunctionality = function () {
   openModalBtn.classList.remove("none");
-  searchBtn.classList.remove("none");
+  // searchBtn.classList.remove("none");
   editBtn.classList.remove("none");
-  sortBtn.classList.remove("none");
+  // sortBtn.classList.remove("none");
   delBtn.classList.remove("none");
   tickBtn.classList.add("none");
   // Showing profile button
