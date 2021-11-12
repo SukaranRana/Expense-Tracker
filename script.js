@@ -27,9 +27,11 @@ const deleteProfile = document.querySelector("#user-minus-icon");
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".close-modal");
 const addBtn = document.querySelector(".btn");
-// Delete Modal elements
+// Delete-Edit Profile elements
 const delYes = document.querySelector(".delete-yes");
 const delNo = document.querySelector(".delete-no");
+const editYes = document.querySelector(".edit-yes");
+const editNo = document.querySelector(".edit-no");
 // Functions
 const init = () => {
   checkUser();
@@ -607,18 +609,40 @@ saveBtn.addEventListener("click", function () {
 
 searchBtn.addEventListener("click", () => {});
 sortBtn.addEventListener("click", () => {});
+
 document.getElementById("user-minus-icon").addEventListener("click", () => {
   document.querySelector(".delete-modal").classList.remove("none");
 });
 delYes.addEventListener("click", () => {
   document.querySelector(".delete-modal").classList.add("none");
-  localStorage.removeItem("user");
-  localStorage.removeItem("transactions");
+  localStorage.clear();
   location.reload();
 });
 delNo.addEventListener("click", () => {
   document.querySelector(".delete-modal").classList.add("none");
   tickBtnFunctionality();
 });
+
+document.getElementById("user-edit-icon").addEventListener("click", () => {
+  document.querySelector(".edit-modal").classList.remove("none");
+  document.querySelector(".edit-input").focus();
+  document.querySelector(".edit-input").value = JSON.parse(
+    localStorage.getItem("user")
+  );
+});
+editYes.addEventListener("click", () => {
+  document.querySelector(".edit-modal").classList.add("none");
+  localStorage.setItem(
+    "user",
+    JSON.stringify(document.querySelector(".edit-input").value)
+  );
+  tickBtnFunctionality();
+  loadMainMenu();
+});
+editNo.addEventListener("click", () => {
+  document.querySelector(".edit-modal").classList.add("none");
+  tickBtnFunctionality();
+});
+
 // Initialisation
 init();
