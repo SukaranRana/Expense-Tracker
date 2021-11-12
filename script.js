@@ -21,11 +21,15 @@ const saveBtn = document.querySelector(".save-btn");
 const sortBtn = document.querySelector(".sort");
 const tickBtn = document.querySelector(".tick");
 const profileBtn = document.querySelector(".fa-user-ninja");
-// Modal elements
+const editProfile = document.querySelector("#user-edit-icon");
+const deleteProfile = document.querySelector("#user-minus-icon");
+//Add-Edit Modal elements
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".close-modal");
 const addBtn = document.querySelector(".btn");
-
+// Delete Modal elements
+const delYes = document.querySelector(".delete-yes");
+const delNo = document.querySelector(".delete-no");
 // Functions
 const init = () => {
   checkUser();
@@ -200,7 +204,7 @@ const calculateBalance = function (array) {
   // Total Balance
   const total = incomes - expenses;
   // Updating DOM
-  if (total > 0) {
+  if (total >= 0) {
     document.querySelector(".savingsMsg").classList.add("none");
   } else {
     document.querySelector(".savingsMsg").classList.remove("none");
@@ -221,6 +225,12 @@ const loadMainMenu = function () {
     totalBalance.textContent = 0;
     incomeBalance.textContent = 0;
     expenseBalance.textContent = 0;
+    html = `
+      <p class="zero-transaction">Click + to add transaction</p>
+    `;
+    document
+      .querySelector(".transaction-list")
+      .insertAdjacentHTML("afterbegin", html);
     return;
   }
   transactionsArray?.forEach((d) => {
@@ -304,9 +314,7 @@ const removeTransaction = function () {
         array = JSON.parse(localStorage.getItem("transactions"));
         let index = -1;
         let data = "";
-        console.log(type, note, amount);
         let count = 0;
-        console.log(array);
         array.forEach((i) => {
           if (i.amount === amount && i.note === note && i.type === type) {
             index = count;
@@ -333,6 +341,8 @@ const displayTick = function () {
   editBtn.classList.add("none");
   sortBtn.classList.add("none");
   delBtn.classList.add("none");
+  // Hiding profile button
+  profileBtn.classList.add("none");
   // Displaying tick button
   tickBtn.classList.remove("none");
 };
@@ -344,6 +354,11 @@ const tickBtnFunctionality = function () {
   sortBtn.classList.remove("none");
   delBtn.classList.remove("none");
   tickBtn.classList.add("none");
+  // Showing profile button
+  profileBtn.classList.remove("none");
+  // Hide edit and delete profile buttons
+  editProfile.classList.add("none");
+  deleteProfile.classList.add("none");
   // Hiding minus and edit-icon buttons against each transaction
   document
     .querySelectorAll(".main-icon")
@@ -365,6 +380,8 @@ const deleteBtnFunctionality = function () {
   document
     .querySelectorAll("#minus-icon")
     .forEach((icon) => icon.classList.remove("none"));
+  // Displaying Delete Profile Button
+  deleteProfile.classList.remove("none");
 };
 
 const editTransaction = function () {
@@ -528,6 +545,7 @@ editBtn.addEventListener("click", () => {
   document
     .querySelectorAll("#edit-icon")
     .forEach((icon) => icon.classList.remove("none"));
+  editProfile.classList.remove("none");
 });
 
 saveBtn.addEventListener("click", function () {
@@ -589,7 +607,18 @@ saveBtn.addEventListener("click", function () {
 
 searchBtn.addEventListener("click", () => {});
 sortBtn.addEventListener("click", () => {});
-profileBtn.addEventListener("click", () => {});
-
+document.getElementById("user-minus-icon").addEventListener("click", () => {
+  document.querySelector(".delete-modal").classList.remove("none");
+});
+delYes.addEventListener("click", () => {
+  document.querySelector(".delete-modal").classList.add("none");
+  localStorage.removeItem("user");
+  localStorage.removeItem("transactions");
+  location.reload();
+});
+delNo.addEventListener("click", () => {
+  document.querySelector(".delete-modal").classList.add("none");
+  tickBtnFunctionality();
+});
 // Initialisation
 init();
