@@ -96,7 +96,14 @@
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  /* border: 1px solid green; */
+}
+.add:hover,
+.delete:hover,
+.search:hover,
+.edit:hover,
+.sort:hover,
+.tick:hover {
+  color:rgb(128,0,128);
 }
 .delete {
   right: 50px;
